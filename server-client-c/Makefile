@@ -1,3 +1,5 @@
-${CC} Socket-server.c -o Socket-server.out
+all: Socket-server.c
+		gcc -Wall Socket-server.c -o Socket-server.out
+
 clean:
-		rm -f ${CLEANFILES}
+		rm -f Socket-server.out

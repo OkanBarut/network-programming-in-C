@@ -22,13 +22,14 @@ int main(void)
   int numrv;
 
   listenfd = socket(AF_INET, SOCK_STREAM, 0);
-  printf("socket retrieve success\n");
+  if (listenfd > 0) printf("socket retrieve success\n");
 
   memset(&serv_addr, '0', sizeof(serv_addr));
-  memset(sendBuff, '0', sizeof(sendBuff));
+  memset(sendBuff, '\0', sizeof(sendBuff));
 
   serv_addr.sin_family = AF_INET;
-  serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  inet_pton(AF_INET,"127.0.0.1",&serv_addr.sin_addr); // This lets only the written IP adddress to connect.
+  //  serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); // This is to accept any incoming IP address.
   serv_addr.sin_port = htons(5000); // was 13 also works
 
   bind(listenfd, (struct sockaddr*)&serv_addr,sizeof(serv_addr));
